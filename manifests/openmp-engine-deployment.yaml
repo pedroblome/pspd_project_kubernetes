@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: openmp-engine
-          image: pedroblome/pspd_trabalho:openmp
+          image: pedroblome/pspd_trabalho:mpi
           imagePullPolicy: Always
           ports:
             - containerPort: 65433
@@ -30,4 +30,3 @@ spec:
               cpu: "100m"
             limits:
               cpu: "500m"
-
