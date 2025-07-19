@@ -17,11 +17,22 @@ spec:
         - name: socket-server
           image: pedroblome/pspd_trabalho:socket
           imagePullPolicy: Always
+          env:
+           - name: KUBECONFIG
+             value: /root/.kube/config
+         volumeMounts:
+           - name: kubeconfig
+             mountPath: /root/.kube
           ports:
             - containerPort: 65431
           env:
             - name: KUBECONFIG
               value: /var/run/secrets/kubernetes.io/serviceaccount/token
+      volumes:
+        - name: kubeconfig
+          configMap:
+            name: kubeconfig
+
 ---
 apiVersion: v1
 kind: Service
@@ -34,4 +45,4 @@ spec:
   ports:
     - port: 65431
       targetPort: 65431
-      nodePort: 30031
+      nodePort:  30080
